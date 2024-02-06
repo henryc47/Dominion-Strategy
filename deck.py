@@ -28,8 +28,33 @@ class Deck():
         sum_vp += self.calculate_victory_points(self.discard_pile)
         return sum_vp
 
+    #calculate the victory points in a particular card list
     def calculate_victory_points(self,card_list):
         sum_vp = 0
         for card in card_list:
             sum_vp += card.vp
         return sum_vp
+
+    #display all the card names in a particular card list
+    def display_card_names(self,card_list):
+        print_str = ""
+        for card in card_list:
+            print_str += card.name
+            print_str += " , "
+        print_str = print_str[:-3]
+        print(print_str)
+    
+    #display all the card names in the players draw pile
+    def display_draw_pile_cards(self):
+        print("Cards in Draw Pile =",end=' ')
+        self.display_card_names(self.draw_pile)
+    
+    #display all the card names in the players hand
+    def display_hand_cards(self):
+        print("Cards in Hand = ",end=' ')
+        self.display_card_names(self.hand)
+    
+    #display all the card names in the players hand
+    def display_discard_pile_cards(self):
+        print("Cards in Discard Pile = ",end=' ')
+        self.display_card_names(self.discard_pile)
