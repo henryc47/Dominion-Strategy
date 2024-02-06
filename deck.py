@@ -20,5 +20,16 @@ class Deck():
     def add_external_card_to_discard_pile(self,new_card : card.Card):
         self.discard_pile.append(new_card)
 
+    #calculate the victory points of all the players cards
+    def calculate_all_victory_points(self):
+        sum_vp = 0
+        sum_vp += self.calculate_victory_points(self.draw_pile)
+        sum_vp += self.calculate_victory_points(self.hand)
+        sum_vp += self.calculate_victory_points(self.discard_pile)
+        return sum_vp
 
-        
+    def calculate_victory_points(self,card_list):
+        sum_vp = 0
+        for card in card_list:
+            sum_vp += card.vp
+        return sum_vp
