@@ -31,6 +31,15 @@ class Piles:
             card_returned = None
         return card_returned,run_out
 
+    #Return a card if possible, return None if they cannot afford it or they are none left. Additional value returns true if we run out of this card on this provision
+    def provide_card_if_can_afford(self,card,buy_power):
+        run_out = False
+        if card.cost_to_buy>buy_power:
+            card_returned = None
+        else:
+            card_returned,run_out = self.provide_card(card)
+        return card_returned,run_out
+            
     #for debug, display the quantity still left in each pile
     def print_card_quantities(self):
         print("Unused Cards")
