@@ -20,6 +20,27 @@ class Deck():
         self.add_starting_cards(starting_cards)
         self.shuffle_draw_pile()
     
+    ##External Access Functions
+    #return the contents of a players hand
+    def provide_hand(self):
+        return self.hand
+
+    #draw the default size hand for the beginning of a players turn
+    def draw_hand(self):
+        self.draw_cards(self.draw_size)
+
+    #draw n cards from the draw pile and place it in the players hand, automatically 
+    def draw_cards(self,n):
+        for i in range(n):
+            drew_card = self.draw_single_card()
+            if drew_card: #we successfully drew a card from the discard pile
+                continue
+            else: #reshuffle in our discard pile
+                discard_pile_exists = self.reshuffle_discard_pile()
+                if discard_pile_exists==False: #no discard pile to reshuffle, we cannot draw all cards
+                    break
+    ##Internal Functions
+    #adds a card starting hand
     def add_starting_cards(self,starting_cards):
         for card in starting_cards:
             self.add_external_card_to_draw_pile(card)
@@ -57,17 +78,6 @@ class Deck():
             draw_card = self.draw_pile.pop() #draw the last card from the draw pile
             self.hand.append(draw_card)
             return True
-    
-    #draw n cards from the draw pile and place it in the players hand, automatically 
-    def draw_cards(self,n):
-        for i in range(n):
-            drew_card = self.draw_single_card()
-            if drew_card: #we successfully drew a card from the discard pile
-                continue
-            else: #reshuffle in our discard pile
-                discard_pile_exists = self.reshuffle_discard_pile()
-                if discard_pile_exists==False: #no discard pile to reshuffle, we cannot draw all cards
-                    break
 
     #calculate the victory points of all the players cards
     def calculate_all_victory_points(self):
@@ -83,6 +93,8 @@ class Deck():
         for card in card_list:
             sum_vp += card.vp
         return sum_vp
+
+    ##Display Functions
 
     #display all the card names in a particular card list
     def display_card_names(self,card_list):
