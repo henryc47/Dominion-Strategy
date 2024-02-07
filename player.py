@@ -16,13 +16,29 @@ class Player():
         self.num_buys = 1
         self.num_actions = 1
         while(self.num_actions>0):
+            action = self.controller.decide_action()
+            self.implement_action(action)
             self.num_actions -= 1
-            #action = self.controller.decide_action()
         while(self.num_buys>0):
-            #card_to_buy = self.controller.decide_buy()
+            card_to_buy = self.controller.decide_buy()
+            self.implement_buy(card_to_buy)
             self.num_buys -= 1
         self.deck.discard_hand()
 
+    #perform the provided action
+    def implement_action(self,action):
+        if action==None:
+            pass
+        else:
+            pass
+    #buy the provided card
+    def implement_buy(self,card_to_buy):
+        if card_to_buy==None:
+            pass
+        else:
+            pass
         
+        
+
     
 

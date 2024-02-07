@@ -51,6 +51,8 @@ class Deck():
                 discard_pile_exists = self.reshuffle_discard_pile()
                 if discard_pile_exists==False: #no discard pile to reshuffle, we cannot draw all cards
                     break
+                else:
+                    self.draw_single_card()
     ##Internal Functions
     #adds a card starting hand
     def add_starting_cards(self,starting_cards):

@@ -27,14 +27,15 @@ class Controller():
         print(self.name," discard pile =",end=' ')
         self.player.deck.display_discard_pile_cards()
 
-    
     #decide on a buy to make, just a placeholder, implement in child class
     def decide_buy(self):
-        print("decide_buy method not implemented in class ",type(self))
+        print("decide_buy method not implemented in ",type(self))
+        return None
     
     #decide on an action to take, just a placeholder, implement in child class
     def decide_action(self):
-        print("decide_action method not implemented in class ",type(self))
+        print("decide_action method not implemented in ",type(self))
+        return None
 
 #control the game manually as a human using the command line
 class ManualController(Controller):
@@ -45,6 +46,7 @@ class ManualController(Controller):
 class BuyPreferenceController(Controller):
     def __init__(self,deck,name):
         super().__init__(deck,name)
+
 
 
 
