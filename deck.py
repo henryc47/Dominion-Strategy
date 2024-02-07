@@ -40,6 +40,15 @@ class Deck():
     def shuffle_draw_pile(self):
         random.shuffle(self.draw_pile)
     
+    #reshuffle the cards in the discard pile into the empty draw pile, return False if the discard pile is empty
+    def reshuffle_discard_pile(self):
+        if len(self.discard_pile)==0:
+            return False
+        random.shuffle(self.discard_pile)
+        self.draw_pile = self.discard_pile
+        self.discard_pile = []
+        return True
+
     #draw a single card from the draw_pile and place it into the players hand, return False is there are no more cards in the players deck
     def draw_single_card(self):
         if len(self.draw_pile)==0: #no more cards left to draw
@@ -48,6 +57,17 @@ class Deck():
             draw_card = self.draw_pile.pop() #draw the last card from the draw pile
             self.hand.append(draw_card)
             return True
+    
+    #draw n cards from the draw pile and place it in the players hand, automatically 
+    def draw_cards(self,n):
+        for i in range(n):
+            drew_card = self.draw_single_card()
+            if drew_card: #we successfully drew a card from the discard pile
+                continue
+            else: #reshuffle in our discard pile
+                discard_pile_exists = self.reshuffle_discard_pile()
+                if discard_pile_exists==False: #no discard pile to reshuffle, we cannot draw all cards
+                    break
 
     #calculate the victory points of all the players cards
     def calculate_all_victory_points(self):
