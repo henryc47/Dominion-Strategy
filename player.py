@@ -1,12 +1,14 @@
-import card as card
-import deck as deck
-import controller as controller
+import card
+import deck
+import controller
+import piles 
 
 #Player class is responsible for performing actions in the game
 class Player():
-    def __init__(self,deck,select_controller):
+    def __init__(self,deck,select_controller,piles):
         self.deck = deck
         self.controller = select_controller
+        self.piles = piles
     
     #perform a players turn
     def turn(self):
@@ -31,12 +33,22 @@ class Player():
             pass
         else:
             pass
-    #buy the provided card
+    #buy the provided card, return True if successful
     def implement_buy(self,card_to_buy):
         if card_to_buy==None:
             pass
         else:
-            pass
+            card_returned,run_out = self.piles.provide_card_if_can_afford(card_to_buy,self.buy_power)
+            if card_returned==None:
+                return False
+            else:
+                self.deck.add_external_card_to_discard_pile(card_returned) #add the external straight card to the discard pile (the correct behaviour by default)
+                self.buy_power -= card_returned.cost_to_buy
+                if run_out: #once we have implemented the manager, this should directly contact the manager to return 
+                    pass
+                return True
+
+            
         
         
 

@@ -6,8 +6,8 @@ prefer_money_strategy = [card.province,card.gold,card.silver,card.copper]
 
 #Controller class is responsible for deciding which actions to take in the game, this is just a parent class to store common variables, implemention is in the child class
 class Controller():
-    def __init__(self,deck,name):
-        self.player = player.Player(deck,self)
+    def __init__(self,deck,name,piles):
+        self.player = player.Player(deck,self,piles)
         self.name = name
     
     #take a turn
@@ -41,13 +41,13 @@ class Controller():
 
 #control the game manually as a human using the command line
 class ManualController(Controller):
-    def __init__(self,deck,name):
-        super().__init__(deck,name)
+    def __init__(self,deck,name,piles):
+        super().__init__(deck,name,piles)
     
 #play the game automatically by buying cards in response to a preference for buying particular cards
 class BuyPreferenceController(Controller):
-    def __init__(self,deck,name,strategy):
-        super().__init__(deck,name)
+    def __init__(self,deck,name,piles,strategy):
+        super().__init__(deck,name,piles)
         self.strategy = strategy
     #decide on which option to buy
     def decide_buy(self):
