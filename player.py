@@ -5,10 +5,11 @@ import piles
 
 #Player class is responsible for performing actions in the game
 class Player():
-    def __init__(self,deck,select_controller,piles):
+    def __init__(self,deck,select_controller,piles,game_manager):
         self.deck = deck
         self.controller = select_controller
         self.piles = piles
+        self.game_manager = game_manager
     
     #perform a players turn
     def turn(self):
@@ -47,7 +48,7 @@ class Player():
                 self.deck.add_external_card_to_discard_pile(card_returned) #add the external straight card to the discard pile (the correct behaviour by default)
                 self.buy_power -= card_returned.cost_to_buy
                 if run_out: #once we have implemented the manager, this should directly contact the manager to return 
-                    pass
+                    self.game_manager.pile_removed = True
                 return True
 
             
