@@ -40,12 +40,14 @@ class Deck():
     def shuffle_draw_pile(self):
         random.shuffle(self.draw_pile)
     
-    #draw a single card from the draw_pile and place it into the players hand, additionally return False if there are no more cards in the deck
+    #draw a single card from the draw_pile and place it into the players hand, return False is there are no more cards in the players deck
     def draw_single_card(self):
         if len(self.draw_pile)==0: #no more cards left to draw
-            return None,False
-
-        
+            return False
+        else:
+            draw_card = self.draw_pile.pop() #draw the last card from the draw pile
+            self.hand.append(draw_card)
+            return True
 
     #calculate the victory points of all the players cards
     def calculate_all_victory_points(self):
