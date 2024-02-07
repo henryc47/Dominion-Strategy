@@ -1,10 +1,8 @@
 #externala modules
 import random
 
-
 #project modules
 import card as card
-
 
 #starting hand
 starting_cards = [card.copper]*7 + [card.estate] *3
@@ -121,15 +119,12 @@ class Deck():
     
     #display all the card names in the players draw pile
     def display_draw_pile_cards(self):
-        print("Cards in Draw Pile =",end=' ')
         self.display_card_names(self.draw_pile)
     
     #display all the card names in the players hand
     def display_hand_cards(self):
-        print("Cards in Hand = ",end=' ')
         self.display_card_names(self.hand)
     
     #display all the card names in the players hand
     def display_discard_pile_cards(self):
-        print("Cards in Discard Pile = ",end=' ')
         self.display_card_names(self.discard_pile)
