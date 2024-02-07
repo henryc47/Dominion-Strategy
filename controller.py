@@ -2,9 +2,12 @@ import card as card
 import deck as deck
 import player as player
 
-prefer_money_strategy = [card.province,card.gold,card.silver,card.copper]
-prefer_land_strategy = [card.province,card.duchy,card.estate,card.copper]
-in_between_strategy = [card.province,card.duchy,card.silver,card.copper]
+prefer_money = [card.province,card.gold,card.silver,card.copper]
+prefer_land = [card.province,card.duchy,card.estate,card.copper]
+in_between = [card.province,card.duchy,card.silver,card.copper]
+market = [card.province,card.gold,card.duchy,card.silver,card.estate,card.copper]
+prefer_money_no_copper = [card.province,card.gold,card.silver]
+
 
 #Controller class is responsible for deciding which actions to take in the game, this is just a parent class to store common variables, implemention is in the child class
 class Controller():

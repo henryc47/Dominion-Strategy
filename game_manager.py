@@ -5,7 +5,7 @@ import piles
 import copy
 import math as m
 
-player_strategies = [controller.prefer_money_strategy,controller.prefer_land_strategy,controller.in_between_strategy]
+player_strategies = [controller.prefer_money,controller.prefer_money_no_copper]
 
 class GameManager():
     def __init__(self,player_strategies):
