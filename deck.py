@@ -1,13 +1,29 @@
+#externala modules
+import random
+
+
+#project modules
 import card as card
+
+
+#starting hand
+starting_cards = [card.copper]*7 + [card.estate] *3
 
 #The deck class stores the cards the player owns
 class Deck():
     #create the storage containers for the deck
-    def __init__(self):
+    def __init__(self,starting_cards):
         self.draw_pile = [] #all cards in the players draw pile
         self.hand = [] #all cards in the players hand
         self.discard_pile = []#all cards in the players discard pile
+        self.draw_size = 5 #how many cards drawn from the deck each turn
+        self.add_starting_cards(starting_cards)
+        self.shuffle_draw_pile()
     
+    def add_starting_cards(self,starting_cards):
+        for card in starting_cards:
+            self.add_external_card_to_draw_pile(card)
+
     #adds a new external card to a players draw pile
     def add_external_card_to_draw_pile(self,new_card : card.Card):
         self.draw_pile.append(new_card)
@@ -19,6 +35,17 @@ class Deck():
     #adds a new external card to a players discard pile
     def add_external_card_to_discard_pile(self,new_card : card.Card):
         self.discard_pile.append(new_card)
+    
+    #shuffle the cards in the draw pile
+    def shuffle_draw_pile(self):
+        random.shuffle(self.draw_pile)
+    
+    #draw a single card from the draw_pile and place it into the players hand, additionally return False if there are no more cards in the deck
+    def draw_single_card(self):
+        if len(self.draw_pile)==0: #no more cards left to draw
+            return None,False
+
+        
 
     #calculate the victory points of all the players cards
     def calculate_all_victory_points(self):
