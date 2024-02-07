@@ -25,6 +25,18 @@ class Deck():
     def provide_hand(self):
         return self.hand
 
+    #discard the contents of the players hand to the discard pile
+    def discard_hand(self):
+        self.discard_pile.extend(self.hand)
+        self.hand = []
+
+    #determine the buy power of the hand
+    def get_hand_buy_power(self):
+        buy_power = 0
+        for card in self.hand:
+            buy_power += card.buy_power
+        return buy_power
+
     #draw the default size hand for the beginning of a players turn
     def draw_hand(self):
         self.draw_cards(self.draw_size)
