@@ -12,6 +12,7 @@ class Controller():
     
     #take a turn
     def turn(self):
+        print(self.name,"'s Turn")
         self.player.turn()
     
     #display all the cards in the hand
@@ -52,8 +53,17 @@ class BuyPreferenceController(Controller):
     #decide on which option to buy
     def decide_buy(self):
         buy_power = self.player.buy_power
-        print("our buy power is ",buy_power)
-        return None
+        print("our buy power is ",buy_power) #debug
+        for card in self.strategy:
+            bought_card = self.player.implement_buy(card)
+            if bought_card==True:
+                print("we bought a ",card.name) #debug
+                break
+        if bought_card==False:
+            print("all cards we are interested in are too expensive") #debug
+
+
+
 
 
 
