@@ -16,6 +16,7 @@ class GameManager():
         self.pile_removed = False
         self.needed_piles_removed = 3
         self.piles_removed = 0
+        self.max_turns = 1000 #if we reach 1000 turns and nobody has won, end the game now
         for i,strategy in enumerate(player_strategies):
             new_name = "CPU" + str(i+1)
             new_cpu = controller.BuyPreferenceController(copy.deepcopy(d),new_name,self.game_pile,self,strategy)
@@ -23,10 +24,13 @@ class GameManager():
         
     def run_game(self):
         game_ended = False
-        while game_ended==False:
+        self.turns_taken = 0
+        while (game_ended==False) and (self.turns_taken<self.max_turns):
             game_ended = self.turn()
-        victory_id = self.determine_victory()
-        return victory_id
+            self.turns_taken += 1
+        
+        victory_ids = self.determine_victory()
+        return victory_ids
     
 
     def turn(self):
@@ -51,16 +55,15 @@ class GameManager():
     #return the index of the player who won, ties are broken by order (will implement better tie handling later)
     def determine_victory(self):
         #The game has come to an end, determine the victor
-        best_player_vp = -m.inf
-        best_player_index = -1
-        best_player_name = ""
-        for i,controller in enumerate(self.players):
-            player_vp = controller.player.deck.calculate_all_victory_points()
-            print("Player ",controller.name," had ",player_vp," Victory Points") #debug
-            if player_vp>best_player_vp:
-                best_player_vp = player_vp
-                best_player_index = i
-                best_player_name = controller.name
+        all_player_vps = self.calculate_all_player_vps()
+        max_vp = max(all_player_vps)
+        victor_indices = [i for i,x in enumerate(all_player_vps) if x==max_vp]
+        return victor_indices
 
-        print("Player ",best_player_name," Won!") #debug
-        return best_player_index
+    #calculate the victory points of all the players
+    def calculate_all_player_vps(self):
+        all_victory_points = []
+        for controller in self.players:
+            all_victory_points.append(controller.player.deck.calculate_all_victory_points())
+        
+        return all_victory_points

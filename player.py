@@ -15,8 +15,8 @@ class Player():
     def turn(self):
         self.deck.draw_hand()
         self.current_hand = self.deck.provide_hand()
-        print("HAND =",end=' ') #debug
-        self.deck.display_card_names(self.current_hand)
+        #print("HAND =",end=' ') #debug
+        #self.deck.display_card_names(self.current_hand)
         self.buy_power = self.deck.get_hand_buy_power()
         self.num_buys = 1
         self.num_actions = 1
