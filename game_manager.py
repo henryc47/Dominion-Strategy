@@ -11,10 +11,10 @@ class GameManager():
     def __init__(self,player_strategies):
         num_players = len(player_strategies)
         d = deck.Deck(deck.starting_cards)
-        print("creating new game pile")
+        #print("creating new game pile") #DEBUG
         self.game_pile = piles.Piles(piles.card_quantities,piles.player_cards,num_players)
-        self.game_pile.print_card_quantities()
-        print(piles.card_quantities)
+        #self.game_pile.print_card_quantities() #DEBUG
+        #print(piles.card_quantities) #DEBUG
         self.players = []
         self.pile_removed = False
         self.needed_piles_removed = 3
@@ -26,7 +26,7 @@ class GameManager():
             self.players.append(new_cpu)
         
     def run_game(self):
-        print("running a new game") #debug
+        #print("running a new game") #debug
         game_ended = False
         self.turns_taken = 0
         while (game_ended==False) and (self.turns_taken<self.max_turns):
@@ -34,8 +34,8 @@ class GameManager():
             self.turns_taken += 1
         
         victory_ids = self.determine_victory()
-        print("turns to resolve = ",self.turns_taken)
-        print("victory ids = ",victory_ids) #debug
+        #print("turns to resolve = ",self.turns_taken)
+        #print("victory ids = ",victory_ids) #debug
         return victory_ids
     
 
