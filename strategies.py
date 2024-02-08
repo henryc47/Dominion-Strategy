@@ -80,6 +80,14 @@ def check_strategy_achievable(strategy,achievable_cost):
             continue
     return False
             
+def get_strategy_name(strategy):
+    strategy_name = "["
+    for card in strategy:
+        strategy_name += " "
+        strategy_name += card.name
+    strategy_name += " "
+    strategy_name += "]"
+    return strategy_name
 
 
 def print_strategy(strategy):
